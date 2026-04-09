@@ -2,38 +2,48 @@
 
 [中文 README](./README.zh-CN.md)
 
-`project-incarnation` is a skill for turning a repo, framework, SDK, methodology, or existing skill into a reusable technical persona.
+`project-incarnation` distills a repo, framework, SDK, methodology, or existing skill into a reusable technical persona.
 
-Its output is not a summary, a role-play card, or a bundle of side files. Its job is to produce one dense `SKILL.md` that preserves how the object actually makes decisions.
+It does not produce a summary or a bundle. It produces one dense `SKILL.md` that preserves how the object actually makes decisions: what it protects, what it rejects, what evidence it checks first, and where it should abstain.
 
-## Why This Exists
+## What This Skill Does
 
-Most generated skills fail for one of two reasons:
+When active, `project-incarnation` is designed to:
 
-- they rewrite documentation without extracting judgment
-- they imitate tone without preserving boundaries, tradeoffs, or evidence paths
+- classify the object being distilled: project, stack, methodology, or existing skill
+- gather evidence from docs, code, tests, releases, maintainer writing, and real-world friction
+- extract judgment crystals, decision heuristics, default objections, boundaries, tensions, and watchlist triggers
+- render a single self-contained child `SKILL.md`
+- avoid bundle-style outputs and tool-specific scaffolding
 
-`project-incarnation` exists to avoid both.
+## Use When
 
-It forces the resulting skill to carry:
+Use this skill when you want to:
 
-- what truth the object is protecting
-- what it rejects by default
-- what evidence it checks first
-- what tradeoffs it accepts
-- when it should abstain
-- what changes should trigger an update
+- turn a codebase into a reusable engineering perspective
+- turn a framework or SDK into a judgment-heavy skill
+- compress a methodology into a skill that can participate in planning or review
+- upgrade an existing skill that has voice but weak evidence, boundaries, or predictive power
 
-## What You Get
+## Output
 
-The result is a single child skill, typically written to:
+The output is a single child skill.
+
+Default location:
 
 ```text
-<repo>/skills/<slug>/SKILL.md
+<project-root>/skills/<slug>/SKILL.md
+```
+
+Fallback when there is no clear project root:
+
+```text
+./skills/<slug>/SKILL.md
 ```
 
 A strong generated child skill should include:
 
+- the truth the object is protecting
 - judgment crystals
 - decision heuristics
 - default objections
@@ -42,7 +52,7 @@ A strong generated child skill should include:
 - confusion warnings
 - watchlist triggers
 
-Tool-private directories such as `.codex/` or `.claude/` are adapter paths, not the canonical default output.
+Tool-private directories such as `.codex/` and `.claude/` are adapter paths, not the canonical default output.
 
 ## Install
 
@@ -54,7 +64,7 @@ cp /path/to/project-incarnation-skill/SKILL.md \
   ~/.codex/skills/project-incarnation/SKILL.md
 ```
 
-Or install from GitHub with the Skills CLI:
+Install from GitHub with the Skills CLI:
 
 ```bash
 npx skills add linsir2/project-incarnation-skill -a codex -g -y
@@ -79,12 +89,12 @@ $project-incarnation Turn FastAPI into a high-density skill focused on API contr
 ```
 
 ```text
-$project-incarnation Upgrade this existing skill with evidence anchors, boundaries, and update triggers.
+$project-incarnation Upgrade this existing skill with better evidence, boundaries, and update triggers.
 ```
 
 ## Best Inputs
 
-You will get the best result if you provide:
+You will get the best results if you provide:
 
 - a local repository path or GitHub URL
 - the framework, SDK, stack, or methodology name
@@ -93,18 +103,13 @@ You will get the best result if you provide:
 - the kinds of questions the generated skill should answer
 - any key docs, PRs, release notes, or maintainer writing
 
-## What Good Output Looks Like
+## Repository Contents
 
-A strong generated skill should let a downstream agent answer:
+This repository is intentionally minimal:
 
-- What does this object protect?
-- What does it oppose?
-- What evidence does it check first?
-- What tradeoffs does it accept?
-- When should it abstain?
-- What events force an update?
-
-If the generated skill only sounds smart but cannot reject a bad plan, it is not finished.
+- [`SKILL.md`](./SKILL.md): the skill itself
+- [`README.md`](./README.md): English documentation
+- [`README.zh-CN.md`](./README.zh-CN.md): Chinese documentation
 
 ## License
 
