@@ -56,18 +56,10 @@
 
 ## 安装
 
-手动安装到 Codex：
-
-```bash
-mkdir -p ~/.codex/skills/project-incarnation
-cp /path/to/project-incarnation-skill/SKILL.md \
-  ~/.codex/skills/project-incarnation/SKILL.md
-```
-
 通过 Skills CLI 从 GitHub 安装：
 
 ```bash
-npx skills add linsir2/project-incarnation-skill -a codex -g -y
+npx skills add linsir2/project-incarnation-skill
 ```
 
 ## 怎么使用
