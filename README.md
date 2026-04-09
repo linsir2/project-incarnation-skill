@@ -2,7 +2,7 @@
 
 `project-incarnation` is a Codex skill for turning a repo, framework, SDK, engineering methodology, or existing skill into a high-density `SKILL.md`.
 
-This skill does not try to produce a bundle, a registry package, or a role-play card. Its job is narrower and stricter: compress an object's real judgment into one file that a downstream agent can actually reason with.
+Its job is narrow and strict: compress an object's real judgment into one self-contained file that a downstream agent can reason with.
 
 ## What This Skill Produces
 
@@ -15,19 +15,18 @@ The output is a single child skill:
 That generated skill should contain:
 
 - the truth the object is protecting
-- its recurring judgment crystals
+- recurring judgment crystals
 - default objections and tradeoffs
-- honest boundaries and abstention rules
+- boundaries and abstention rules
 - evidence anchors
 - update triggers and confusion warnings
 
-This skill explicitly does **not** aim to generate:
+This skill does **not** try to generate bundles or sidecar packages such as:
 
 - `constitution.yaml`
 - `sources.jsonl`
 - `bundle-spec.json`
 - `evals.md`
-- multi-file sidecar packages
 
 ## Best Use Cases
 
@@ -37,7 +36,7 @@ Use `project-incarnation` when you want to:
 - turn a framework or SDK into a judgment-heavy skill
 - compress an engineering philosophy or methodology into a usable agent skill
 - upgrade an existing weak skill that has voice but not evidence
-- produce a reusable technical persona for planning, review, or design work
+- produce a reusable technical persona for planning, review, migration, or design work
 
 ## How The Skill Works
 
@@ -50,7 +49,7 @@ The skill follows a strict pipeline:
 5. Run density checks before rendering.
 6. Emit a single self-contained `SKILL.md`.
 
-The important design rule is that the generated skill must be able to stand on its own. If it needs extra files to explain how it thinks, the distillation failed.
+If the generated skill needs extra files to explain how it thinks, the distillation failed.
 
 ## Repository Layout
 
@@ -58,40 +57,37 @@ The important design rule is that the generated skill must be able to stand on i
 ./
 ├── LICENSE
 ├── README.md
-├── SKILL.md
-├── SKILL.zh-CN.md
-└── .codex/
-    └── skills/
-        └── project-incarnation/
-            ├── LICENSE.txt
-            ├── SKILL.md
-            └── SKILL.zh-CN.md
+└── SKILL.md
 ```
 
-Notes:
+This repository is intentionally flat. The public distribution surface is one English `SKILL.md`.
 
-- Root [`SKILL.md`](./SKILL.md) is the install surface for `npx skills add`.
-- [`SKILL.md`](./SKILL.md) is the English default.
-- [`SKILL.zh-CN.md`](./SKILL.zh-CN.md) preserves the original Chinese source.
-- The nested `.codex/skills/project-incarnation/` path matches Codex's native skill layout.
+## Translation Audit
+
+The current English `SKILL.md` was reviewed against the original Chinese draft before the repository was flattened.
+
+That review verified preservation of the same:
+
+- scope
+- phase order
+- evidence requirements
+- rendering contract
+- validation checklist
+- update protocol
+- forbidden moves
+
+The English file is meant to be a semantic translation, not a simplified rewrite.
 
 ## Install
 
 ### Option 1: Manual Codex install
 
-Copy the skill into your local Codex skills directory:
+Copy the root skill file into your local Codex skills directory:
 
 ```bash
 mkdir -p ~/.codex/skills/project-incarnation
-cp /path/to/project-incarnation-skill/.codex/skills/project-incarnation/SKILL.md \
+cp /path/to/project-incarnation-skill/SKILL.md \
   ~/.codex/skills/project-incarnation/SKILL.md
-```
-
-If you also want the Chinese reference file:
-
-```bash
-cp /path/to/project-incarnation-skill/.codex/skills/project-incarnation/SKILL.zh-CN.md \
-  ~/.codex/skills/project-incarnation/SKILL.zh-CN.md
 ```
 
 After installing a new skill, restart Codex so it reloads the skill list.
@@ -120,7 +116,7 @@ You do not need to publish the skill itself as an npm package. The `skills` pack
 
 ## How To Invoke The Skill
 
-After installation, invoke it explicitly by name in an agent that supports skills. The clearest form is:
+After installation, invoke it explicitly by name:
 
 ```text
 $project-incarnation <your request>
@@ -140,8 +136,6 @@ $project-incarnation Turn FastAPI into a high-density skill focused on API contr
 $project-incarnation Upgrade this existing skill into a denser version with evidence anchors, boundaries, and update triggers.
 ```
 
-You can also phrase the request more naturally if your agent routes skills from descriptions, but explicit invocation is more reliable.
-
 ## What Inputs Produce The Best Results
 
 The skill works best when you provide one or more of the following:
@@ -157,7 +151,7 @@ For better outputs, include:
 - the object's version or branch
 - what kind of questions the future skill should answer
 - what it should explicitly avoid answering
-- any important docs, PRs, release notes, or maintainer essays
+- important docs, PRs, release notes, or maintainer essays
 
 ## What Good Output Looks Like
 
@@ -188,7 +182,7 @@ The expected pattern is:
 2. Install the generated child skill.
 3. Invoke the child skill directly for future work.
 
-`project-incarnation` is the authoring skill. The generated skill is the reusable judgment artifact.
+`project-incarnation` is the authoring skill. The generated child skill is the reusable judgment artifact.
 
 ## Updating A Generated Skill
 
@@ -219,10 +213,10 @@ git push -u origin main
 
 ## skills.sh And `npx skills`
 
-The current distribution path is:
+The intended distribution path is:
 
 1. Publish the skill in a GitHub repository.
-2. Make sure the repository exposes a valid root `SKILL.md`.
+2. Expose a valid root `SKILL.md`.
 3. Install it with `npx skills add <owner>/<repo> -a codex -g`.
 4. Let the skills ecosystem discover it through installs.
 
@@ -230,15 +224,14 @@ In practice, supporting `skills.sh` means making the GitHub repository installab
 
 ## Local Verification Status
 
-This repository has been prepared for that distribution path:
+This repository is prepared for that distribution path:
 
 - root `SKILL.md` exists for CLI discovery
-- nested Codex-native skill path exists
 - an MIT license is included
-- the default skill is now English
-- the original Chinese version is preserved
+- the repository ships a single English skill file
+- the English version was reviewed against the original Chinese draft before flattening
 
-Live verification of `npx skills` in this environment is still incomplete because `npx skills --help` timed out instead of returning a CLI response.
+Live verification of `npx skills` in this environment is still incomplete because npm registry lookup failed here.
 
 More specifically, `npm view skills version` reached the npm registry lookup step and failed with DNS resolution errors (`EAI_AGAIN`) in this environment, so the repository is prepared for distribution but not yet proven by a live remote install here.
 

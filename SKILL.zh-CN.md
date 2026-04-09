@@ -1,1 +1,0 @@
-.codex/skills/project-incarnation/SKILL.zh-CN.md
