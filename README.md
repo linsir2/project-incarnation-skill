@@ -1,33 +1,52 @@
 # project-incarnation
 
-[中文说明](./README.zh-CN.md)
+[中文 README](./README.zh-CN.md)
 
-`project-incarnation` is a skill for distilling a repo, framework, SDK, methodology, or existing skill into a high-density `SKILL.md`.
+`project-incarnation` is a skill for turning a repo, framework, SDK, methodology, or existing skill into a reusable technical persona.
 
-It is an authoring skill. Its job is to compress an object's real judgment into one reusable child skill, not to generate bundles or sidecar metadata.
+Its output is not a summary, a role-play card, or a bundle of side files. Its job is to produce one dense `SKILL.md` that preserves how the object actually makes decisions.
 
-## What It Produces
+## Why This Exists
 
-The output is a single child skill, typically written to:
+Most generated skills fail for one of two reasons:
+
+- they rewrite documentation without extracting judgment
+- they imitate tone without preserving boundaries, tradeoffs, or evidence paths
+
+`project-incarnation` exists to avoid both.
+
+It forces the resulting skill to carry:
+
+- what truth the object is protecting
+- what it rejects by default
+- what evidence it checks first
+- what tradeoffs it accepts
+- when it should abstain
+- what changes should trigger an update
+
+## What You Get
+
+The result is a single child skill, typically written to:
 
 ```text
 <repo>/skills/<slug>/SKILL.md
 ```
 
-A good generated skill should contain:
+A strong generated child skill should include:
 
-- the truth the object is protecting
-- recurring judgment crystals
-- default objections and tradeoffs
-- boundaries and abstention rules
+- judgment crystals
+- decision heuristics
+- default objections
+- honest boundaries
 - evidence anchors
-- update triggers and confusion warnings
+- confusion warnings
+- watchlist triggers
 
 Tool-private directories such as `.codex/` or `.claude/` are adapter paths, not the canonical default output.
 
 ## Install
 
-Manual Codex install:
+Install manually into Codex:
 
 ```bash
 mkdir -p ~/.codex/skills/project-incarnation
@@ -35,7 +54,7 @@ cp /path/to/project-incarnation-skill/SKILL.md \
   ~/.codex/skills/project-incarnation/SKILL.md
 ```
 
-Install from GitHub with the Skills CLI:
+Or install from GitHub with the Skills CLI:
 
 ```bash
 npx skills add linsir2/project-incarnation-skill -a codex -g -y
@@ -65,13 +84,13 @@ $project-incarnation Upgrade this existing skill with evidence anchors, boundari
 
 ## Best Inputs
 
-This skill works best when you provide:
+You will get the best result if you provide:
 
 - a local repository path or GitHub URL
-- a framework, SDK, stack, or methodology name
-- an existing `SKILL.md` if you want an upgrade
-- the version or branch you care about
-- the question types the generated child skill should answer
+- the framework, SDK, stack, or methodology name
+- an existing `SKILL.md` when upgrading
+- the version or branch that matters
+- the kinds of questions the generated skill should answer
 - any key docs, PRs, release notes, or maintainer writing
 
 ## What Good Output Looks Like
@@ -85,7 +104,7 @@ A strong generated skill should let a downstream agent answer:
 - When should it abstain?
 - What events force an update?
 
-If the generated skill only sounds smart but cannot reject a bad plan, it is not done.
+If the generated skill only sounds smart but cannot reject a bad plan, it is not finished.
 
 ## License
 
