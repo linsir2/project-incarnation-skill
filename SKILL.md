@@ -1,717 +1,737 @@
 ---
 name: project-incarnation
 description: |
-  Project Incarnation: distill a repo, tech stack, methodology, or existing skill into a high-density, directly runnable `SKILL.md`.
-  The goal is not to produce a bundle, but a technical persona that preserves judgment, boundaries, preferences, anti-patterns, and evidence paths.
-  Use it to distill projects, frameworks, SDKs, engineering systems, and existing skills.
+  项目化身术：把 repo / 技术栈 / 方法论 / 现有 skill 蒸馏成一个高知识密度、可直接运行的 `SKILL.md`。
+  目标不是产出 bundle，而是产出“技术化身”：能复现对象的判断、边界、偏好、反模式与求证路径。
+  适用于：蒸馏项目、框架、SDK、工程体系、已有 skill。
 ---
 
-# Project Incarnation
+# 项目化身术
 
-> Not a document copier. A judgment compressor.
+> 不做文档复印机，只做判断压缩机。
 
-## Core Idea
+## 核心理念
 
-A project incarnation is not a summary of what something is. It is a compression of how that thing makes decisions.
+项目化身不是“介绍这个东西是什么”，而是把一个对象压缩成一份**可继续做判断的认知器官**。
 
-A good technical persona should let a downstream agent, harness, or human reader infer, from one `SKILL.md` alone:
+一个合格的技术化身，至少要让后续的 agent / harness / 人类读者只靠这一份 `SKILL.md` 就知道：
 
-1. What truth this object is trying to protect
-2. What mistakes it tends to reject on instinct
-3. What evidence it looks for first on a new problem
-4. Where it should abstain or lower confidence
-5. Why its judgment is distinctive instead of generic best-practice sludge
+1. 这个对象到底在保护什么真相
+2. 它最常反对什么错误
+3. 它遇到新问题时先看什么证据
+4. 它在哪些地方必须闭嘴或降置信度
+5. 它的判断为什么不是通用废话，而是这个对象独有的判断
 
-The key distinction:
+**关键区分**：
 
-- Do not copy docs. Extract judgment.
-- Do not list features. Extract tradeoffs.
-- Do not say "it is powerful." Say how it pushes back.
-- Do not generate a bundle of sidecars. Generate one self-contained `SKILL.md`.
+- 不是复制文档，而是提炼判断
+- 不是列功能点，而是提炼取舍
+- 不是写“它很厉害”，而是写“它会如何反对你”
+- 不是生成一堆附属文件，而是生成一个**自包含**的 `SKILL.md`
 
-The final artifact is only:
+最终产物只有：
 
 ```text
-.codex/skills/<slug>/
+<project-root>/skills/<slug>/
 └── SKILL.md
 ```
 
-Do not generate `constitution.yaml`, `sources.jsonl`, `bundle-spec.json`, `evals.md`, `references/`, or `scripts/`.
+不生成 `constitution.yaml`、`sources.jsonl`、`bundle-spec.json`、`evals.md`、`references/`、`scripts/`。
 
-If a skill only works when a pile of side files survives next to it, it is not yet a real technical persona.
+如果一个子 skill 需要靠一堆旁路文件才能成立，那它还不是技术化身，只是半成品。
 
-## What High Knowledge Density Means
+## 什么叫“高知识密度”
 
-Knowledge density is not "a lot of information." It is "remove one sentence and you lose predictive power."
+知识密度不是“信息多”，而是“删一句就少一分预测力”。
 
-When distilling, keep these:
+蒸馏时，优先保留这些东西：
 
-- **Judgment crystals**: recurring principles and preferences
-- **Decision heuristics**: how the object cuts real choices
-- **Default objections**: what it resists without being asked
-- **Boundary conditions**: when it should abstain
-- **Evidence paths**: where it looks first when facts matter
-- **Internal tensions**: where it is costly, contradictory, or version-sensitive
+- **判断晶体**：这个对象反复保护的原则与偏好
+- **决策启发式**：遇到选择时它倾向怎么切
+- **默认反对项**：它会本能抵抗什么
+- **边界条件**：什么时候它应该 abstain
+- **证据路径**：遇到事实型问题时它先查什么
+- **内在张力**：它不是永远正确，它也有矛盾、版本漂移和代价
 
-Delete these:
+删掉这些东西：
 
-- API or feature inventories
-- README rewrites
-- universally agreeable platitudes
-- mood descriptions with no source support
-- background material that does not improve future judgment
+- API 或 feature 的流水账
+- 把 README 改写一遍
+- 所有人都同意的正确废话
+- 没有来源支撑的“气质描述”
+- 不能提升未来判断质量的背景材料
 
-## What Counts As A Technical Persona
+## 技术化身的判定标准
 
-It only qualifies if all of the following are true:
+只有同时满足下列条件，才能算“技术化身”：
 
-### 1. Predictive power
+### 1. 有预测力
 
-After reading the skill, you should be able to predict how the object will lean on a new but adjacent problem, not merely restate old opinions.
+读完这份 skill，应该能大致推断这个对象在一个**新问题**上的倾向，而不只是复述旧观点。
 
-### 2. Opposition power
+### 2. 有反对力
 
-It should not only agree. It must be able to explain what violates its core judgment.
+它不只是会赞同，还会明确指出什么方案违背了自己的核心判断。
 
-### 3. Boundaries
+### 3. 有边界
 
-It must know when to say "this is not my domain" or "I need fresher evidence first."
+它知道什么时候该说“这不归我管”或“证据不够，先查”。
 
-### 4. Time awareness
+### 4. 有时效意识
 
-Projects, stacks, and SDKs move. The skill must state version scope and research cutoff.
+项目、技术栈、SDK 都会变。skill 必须明确版本范围与调研截止时间。
 
-### 5. Evidence spine
+### 5. 有证据脊柱
 
-Core claims must be traceable to primary or near-primary material. Unsupported claims stay weak and clearly marked.
+核心判断必须能追溯到对象的一手或准一手材料。无法追溯的内容，只能作为弱推断。
 
-### 6. Single-file operability
+### 6. 可单文件运行
 
-If someone copies away just `SKILL.md`, it must still say who it is, how it thinks, what it protects, and when it should shut up.
+把 `SKILL.md` 单独复制走，下游仍然能知道它是谁、怎么想、凭什么、何时闭嘴。
 
-## When To Use This Skill
+## 什么时候用
 
-This skill should trigger for requests like:
+这些请求都应该触发：
 
-- "Make a persona for this repo"
-- "Distill this stack into a skill"
-- "Turn this project into a technical point of view"
-- "Compress this framework's maintainer judgment into a skill"
-- "Upgrade this existing skill into something denser"
-- "Turn this engineering methodology into a skill that can participate in discussion"
+- 给这个 repo 做个化身
+- 把这个技术栈蒸馏成 skill
+- 把这个项目做成技术人格
+- 把这个 framework 的 maintainer judgment 压成一个 skill
+- 把现有 skill 升级成更高知识密度的技术化身
+- 把一个工程方法论做成能参与讨论的子 skill
 
-## Phase 0: Route The Request
+## Phase 0: 入口分流
 
-First classify the input:
+收到请求后，先判断输入类型：
 
-| Input | Path | Default emphasis |
+| 输入 | 路径 | 默认重点 |
 | --- | --- | --- |
-| Explicit repo / local project / GitHub repository | Project distillation | maintainer judgment, architecture boundaries, historical tradeoffs |
-| Explicit framework / SDK / stack | Stack distillation | core abstractions, API boundaries, migration hazards |
-| Explicit methodology / engineering philosophy | Method distillation | principles, cases, anti-patterns, applicability |
-| Existing skill | Upgrade path | read the old skill, repair evidence, boundaries, and predictive power |
-| "I want a capability" without a clear object | Diagnosis path | identify the real object to distill before continuing |
+| 明确 repo / 本地项目 / GitHub 仓库 | 项目蒸馏 | 维护者判断、架构边界、历史取舍 |
+| 明确框架 / SDK / 技术栈 | 技术栈蒸馏 | 核心抽象、API 边界、迁移与坑点 |
+| 明确方法论 / 工程哲学 | 方法论蒸馏 | 原则、案例、反模式、适用条件 |
+| 已有 skill | 升级路径 | 读取旧 skill，补足证据、边界、预测力 |
+| 用户只说“我想要一种能力” | 诊断路径 | 先判断该蒸馏哪个对象，再进入对应路径 |
 
-If the user does not specify an output path, write to:
+如果用户没有指定输出位置，默认写到：
 
 ```text
-.codex/skills/<slug>/SKILL.md
+<project-root>/skills/<slug>/SKILL.md
 ```
 
-`<slug>` rules:
+如果当前不在一个明确项目根内，就回退到：
 
-- Project: repo or system name
-- Stack: official name in kebab-case
-- Methodology: a short name that captures its decision style
-- Existing skill upgrade: keep the original slug
+```text
+./skills/<slug>/SKILL.md
+```
 
-## Phase 0.5: The Four Anchors
+路径角色约定：
 
-Before research starts, lock these four anchors. If these drift, the whole artifact drifts:
+- `authoring root`：authoring/compiler 类 skill 的 canonical 位置，例如 `<project-root>/authoring/`
+- `runtime skill root`：运行时子 skill 的默认位置，例如 `<project-root>/skills/`
+- `trace root`：运行痕迹与回放资产的位置，例如 `<project-root>/traces/`
 
-1. **What exactly is being distilled**
-   - Not "all of programming," but a concrete project, framework, methodology, or skill
+像 `.codex/`、`.claude/` 这样的工具私有目录，只能作为 adapter / convenience 入口，不应当再被写成 canonical 默认值。
 
-2. **What truth it protects**
-   - Not "help users," but something sharper, such as "clear boundaries beat magical convenience"
+`<slug>` 规则：
 
-3. **What class of problems it should handle**
-   - Architecture tradeoffs, migration judgment, API design, performance boundaries, engineering culture, product direction
+- 项目：repo 名或系统名
+- 技术栈：官方名称转 kebab-case
+- 方法论：能代表其判断风格的清晰短名
+- 已有 skill 升级：沿用原 slug
 
-4. **What it does not own**
-   - Example: "This captures React core-team judgment, not all frontend best practices"
+## Phase 0.5: 开工前的四个锚点
 
-If the user leaves these implicit, make the most reasonable assumptions and record them in the delivered skill.
+在调研前，先把以下四个锚点明确下来。四个锚点不清，后面都会漂：
 
-## Phase 1: Collect Evidence
+1. **蒸馏对象是谁**
+   - 不是“整个编程世界”，而是具体项目、框架、方法论或 skill
 
-The goal is not "read many things." The goal is to gather an evidence skeleton strong enough to support judgment.
+2. **它要保护什么**
+   - 不是“帮助用户”，而是一个更尖锐的真相，例如“边界清晰优于魔法便利”
 
-### Source priority
+3. **它主要要处理什么问题**
+   - 架构取舍、迁移判断、API 设计、性能边界、工程文化、项目方向
 
-#### Project distillation
+4. **它不负责什么**
+   - 例如“只代表 React 核心团队判断，不代表所有前端最佳实践”
 
-Read, in order:
+如果用户没有明确这些信息，按最合理的默认假设推进，但必须把假设写进最终 skill。
 
-1. Root docs: `README`, `docs/`, ADRs, architecture notes
-2. Code and boundaries: entrypoints, core modules, key configuration, tests
-3. Decision history: major PRs, issues, release notes, changelog
-4. Maintainer voice: blog posts, interviews, RFCs, discussions
-5. Real friction: external critiques, migration pain, common failure modes
+## Phase 1: 来源采集
 
-#### Stack distillation
+这里的目标不是“搜很多资料”，而是拿到足以支撑判断的**证据骨架**。
 
-Read, in order:
+### 来源优先级
 
-1. Official docs and concept pages
-2. Migration guides, upgrade guides, release notes
-3. Official API and contract boundaries
-4. Maintainer writing, RFCs, design discussions
-5. Community disputes, recurring pitfalls, strong critiques
+#### 项目蒸馏
 
-Run an **object-consistency check** before going deeper:
+优先读：
 
-- Is the user naming the real thing used in the code?
-- Or are they actually using a substrate, upstream protocol, or adjacent implementation?
-- Or is the project branded as A while the implementation behaves more like B?
+1. repo 根文档：`README`、`docs/`、`ADR`、架构说明
+2. 代码与边界：入口文件、核心模块、关键配置、测试
+3. 历史决策：重要 PR、issue、release notes、changelog
+4. 维护者声音：维护者博客、访谈、RFC、discussion
+5. 真实摩擦：外部批评、迁移吐槽、常见坑
 
-If there is a mismatch, do not force B into A's costume.
+#### 技术栈蒸馏
 
-Correct behavior:
+优先读：
 
-- State the gap between the named object and the actual implementation surface
-- Separate object-specific judgment from adjacent transferable discipline
-- Call out the mismatch in `Out-of-scope`, `Confusion Pairs`, or `Honest Boundaries`
-- Do not force missing native concepts to appear
+1. 官方文档与核心概念页
+2. migration guide / upgrade guide / release notes
+3. 官方 API 边界说明
+4. maintainer 写作、RFC、设计讨论
+5. 社区争议、踩坑案例、反对者批评
 
-Examples:
+先做一个**对象一致性检查**：
 
-- The user says FastAPI, but the project is really Starlette + Pydantic
-- The user says LangGraph, but the implementation is closer to a custom DAG runtime
-- The user says React, but the code only inherits some React ecosystem constraints
+- 用户说的对象，是否真的是代码里实际在用的那个对象
+- 还是它的相邻底座 / 上游协议 / 近亲实现
+- 还是“项目叙事上叫 A，实际实现更接近 B”
 
-#### Methodology distillation
+如果出现这种错位，例如：
 
-Read, in order:
+- 名义上说是 FastAPI，实际主体是 Starlette
+- 名义上说是 LangGraph，实际更像自定义 DAG runtime
+- 名义上说是 React，实际只是消费了部分 React 生态约束
 
-1. Original writing, official essays, or long-form texts
-2. Long interviews, talks, or Q&A
-3. Concrete decisions or case studies
-4. Serious critiques and counterexamples
+不要硬把 B 蒸成 A。
 
-#### Existing skill upgrade
+正确做法是：
 
-Read, in order:
+- 明确写出**对象名**与**实际实现面**的差异
+- 区分哪些判断是该对象独有的，哪些只是可迁移的相邻 discipline
+- 在 `不适用问题`、`误判警报` 或 `诚实边界` 中显式写出这层错位
+- 对缺席的原生概念，不要强行要求它们出现
 
-1. The current `SKILL.md`
-2. The upstream object it refers to or implies
-3. The most important recent changes in that object
+例如：
 
-### Permanent blacklist
+- 目标是 FastAPI，但项目其实是 Starlette + Pydantic  
+  那么可以用 FastAPI skill 的“契约 / I-O / 部署纪律”去审，
+  但不能强行要求 `Depends`、`APIRouter`、自动 OpenAPI 全部存在。
 
-These do not count as primary sources:
+#### 方法论蒸馏
 
-- AI summary farms
-- SEO assembly-line blogs
-- reposted summaries with no traceable original text
-- empty "best practices" articles
-- unattributed, unversioned, case-free secondhand writeups
+优先读：
 
-Weak sources may give clues, but never direct conclusions.
+1. 原著、官方文章、长文
+2. 长访谈 / 演讲 / 问答
+3. 具体决策案例
+4. 有力度的批评与反例
 
-### Minimum evidence bar
+#### 现有 skill 升级
 
-If the bar is not met, keep gathering and do not render yet.
+优先读：
 
-#### Project
+1. 旧 `SKILL.md`
+2. 它引用或暗示的上游对象
+3. 该对象最近变化的关键材料
 
-- At least 1 architecture or boundary source
-- At least 1 maintainer-judgment source
-- At least 1 real decision or migration source
-- At least 1 code- or test-level piece of evidence
-- At least 1 external-friction source
+### 永久黑名单
 
-#### Stack
+这些内容不能当主来源：
 
-- At least 1 core-concept source
-- At least 1 API or contract source
-- At least 1 migration or breaking-change source
-- At least 1 maintainer-judgment source
-- At least 1 dispute or pitfall source
+- AI 摘要站
+- SEO 拼装博客
+- 无法追溯原文的搬运总结
+- 只会喊“最佳实践”的空洞经验贴
+- 没有署名、没有版本、没有具体案例的二手拼接
 
-#### Methodology
+如果弱来源里碰巧有价值线索，只能当线索，不可直接当结论。
 
-- At least 2 primary texts
-- At least 1 long interview or talk
-- At least 1 real case study
-- At least 1 serious opposing source
+### 最小来源门槛
 
-## Phase 2: Extract The Wisdom Crystals
+如果没到门槛，就继续采集，不要渲染：
 
-Only enter compression once the source base is strong enough.
+#### 项目
 
-Your job is not to summarize. Your job is to extract the structures that make future judgment possible.
+- 至少 1 个架构/边界来源
+- 至少 1 个维护者判断来源
+- 至少 1 个真实决策或迁移来源
+- 至少 1 个代码或测试层证据
+- 至少 1 个外部摩擦来源
 
-### 2.1 Core judgment crystals (3-7)
+#### 技术栈
 
-Each crystal must answer:
+- 至少 1 个核心概念来源
+- 至少 1 个 API / contract 来源
+- 至少 1 个迁移或 breaking change 来源
+- 至少 1 个 maintainer judgment 来源
+- 至少 1 个争议或坑点来源
 
-- What judgment is it actually protecting?
-- How many times does it recur, and across which source types?
-- How does it change real decisions?
-- What does it reject by default?
-- What cost, sacrifice, or burden comes with keeping it?
-- Where does it stop applying?
+#### 方法论
 
-Each crystal must also carry four metadata tags:
+- 至少 2 个一手文本
+- 至少 1 个长对话或演讲
+- 至少 1 个实际案例
+- 至少 1 个有力度的反方材料
 
-- **Evidence level**: `primary` / `mixed` / `inferred`
-- **Time sensitivity**: `low` / `medium` / `high`
-- **Exclusivity note**: why this is specific to the object instead of generic correctness
-- **Confidence**: `low` / `medium` / `high`
+## Phase 2: 提炼“智慧晶体”
 
-Judgment crystal pass criteria:
+只有在来源足够后，才进入压缩。
 
-1. **Recurring**: not a one-off opinion
-2. **Cross-context**: visible in docs, code, decisions, or disputes
-3. **Predictive**: usable on unseen but adjacent questions
-4. **Exclusive**: not something everybody says
-5. **Costly**: preserving it sacrifices something
+你的任务不是做摘要，而是从材料里挖出下面这些东西：
 
-If a candidate clears fewer than three of the five, it is not a crystal.
+### 2.1 核心判断晶体（3-7个）
 
-### 2.2 Decision heuristics (5-10)
+每个晶体都要回答：
 
-Write these in `If X, prefer Y` form.
+- 它到底在保护什么判断
+- 这个判断出现了几次，在哪些不同来源里出现
+- 它会如何改变真实决策
+- 它默认反对什么
+- 它因此放弃了什么，或要求你承担什么代价
+- 它的适用边界在哪里
 
-A good heuristic:
+每个晶体还必须带 4 个元标签：
 
-- participates in real decisions
-- is not just a value statement
-- reveals preference ordering
-- is tied to a concrete context or repeated tradeoff
+- **证据级别**：`primary` / `mixed` / `inferred`
+- **时效敏感度**：`low` / `medium` / `high`
+- **排他性说明**：为什么这不是通用正确话，而是这个对象自己的判断
+- **置信度**：`low` / `medium` / `high`
 
-### 2.3 Default objections (3-7)
+**判断晶体通过标准**：
 
-Wisdom is defined as much by what the object resists as by what it recommends.
+1. **反复出现**：不是一次性表态
+2. **跨场景复现**：能在文档、代码、决策、争议里看见影子
+3. **能推新问题**：可以外推到未见过的问题
+4. **有排他性**：不是人人都会说的套话
+5. **有代价**：坚持它会牺牲什么
 
-Examples:
+五条里少于三条，不配叫“晶体”。
 
-- boundary drift
-- implicit magic
-- over-abstraction
-- fake backwards compatibility
-- pretending a local problem is a platform problem
+### 2.2 决策启发式（5-10条）
 
-Keep objections concrete and, ideally, tied to real disputes or historical choices.
+用 `如果 X，则优先 Y` 的形式写。
 
-### Stable core vs version-sensitive layer
+好启发式的特征：
 
-Every project, stack, and SDK skill must explicitly split judgment into:
+- 可以直接参与现实决策
+- 不只是价值宣言
+- 能看出对象的偏好顺序
+- 最好能绑定具体情境或经典取舍
 
-- **Stable core**: likely to survive short-term version movement
-- **Version-sensitive layer**: requires re-checking when releases, maintainer stance, or runtime assumptions change
+### 2.3 默认反对项（3-7条）
 
-For methodologies, replace the second layer with:
+一个对象的智慧，不只在它推什么，也在它会本能反对什么。
 
-- **Context-sensitive layer**: judgment that depends heavily on era, market structure, org size, or tool environment
+例如：
 
-Without this split, every update becomes a full rewrite.
+- 边界漂移
+- 隐式魔法
+- 过度抽象
+- 版本不兼容却装作兼容
+- 把单机问题硬吹成平台问题
 
-### 2.4 Honest boundaries (at least 3)
+默认反对项必须尽量具体，最好能对应实际争议或历史决策。
 
-State clearly:
+### 稳定内核 vs 版本敏感层
 
-- which questions it should not answer
-- which questions require fresh sources first
-- which questions only permit conditional judgment
+任何项目、技术栈、SDK 类子 skill，都必须显式拆成两层：
 
-### 2.5 Internal tensions (2-5)
+- **稳定内核**：短期版本波动下大概率仍成立的判断
+- **版本敏感层**：一旦 release、maintainer stance、breaking change、运行时模型变化，就要重查的判断
 
-Anything worth distilling has internal tension. No tension usually means a shallow read.
+如果对象是方法论而不是技术栈，可以把第二层改写成：
 
-Common tensions:
+- **语境敏感层**：受时代、产业结构、组织规模、工具环境影响很大的判断
 
-- simplicity vs flexibility
-- explicitness vs convenience
-- performance vs maintainability
-- stable APIs vs rapid evolution
-- maintainer will vs community diversity
+没有这层切分，更新时就只能整份 skill 一起重写。
 
-### 2.6 Evidence anchors
+### 2.4 诚实边界（至少 3 条）
 
-The final skill must carry its own compact evidence anchors.
+必须明确：
 
-Suggested format:
+- 哪类问题它不适合回答
+- 哪类问题它必须先看最新资料
+- 哪类问题它只能给条件性判断
+
+### 2.5 内在张力（2-5 条）
+
+任何值得蒸馏的对象都有内在张力。没有张力，通常说明蒸馏得太浅。
+
+常见张力：
+
+- 简洁 vs 灵活
+- 显式 vs 易用
+- 性能 vs 可维护
+- 稳定 API vs 快速演进
+- 维护者意志 vs 社区多样性
+
+### 2.6 证据锚点
+
+最终 skill 必须自带一组紧凑的证据锚点。
+
+格式建议：
 
 ```markdown
-- [E1] React docs, "Thinking in React", 2024-xx-xx
+- [E1] React docs, “Thinking in React”, 2024-xx-xx
 - [E2] Maintainer comment in issue #1234, 2025-xx-xx
-- [E3] Release notes v3.0, rationale for breaking change
+- [E3] Release notes v3.0, breaking change rationale
 ```
 
-Later judgment can cite `[E1] [E3]` directly. Do not depend on a sidecar `sources.jsonl`.
+后文的重要判断可以引用 `[E1] [E3]`，不需要再依赖外部 `sources.jsonl`。
 
-### Confusion pairs
+### 误判警报（Confusion Pairs）
 
-Every skill must include a `Confusion Pairs` section that spells out where it is most likely to be misapplied.
+每个子 skill 都必须有一组 `误判警报`，说明它最容易在哪些相邻问题上被误用。
 
-Suggested formats:
+格式建议：
 
-- `Do not mistake X for Y`
-- `When the user is really asking A, this skill can only answer up to B`
-- `This object looks similar to adjacent object C, but the real fork is D`
+- `不要把 X 问题误当成 Y 问题`
+- `当用户其实在问 A 时，这个 skill 最多只能回答到 B`
+- `这个对象和相邻对象 C 看起来很像，但它们真正分叉在 D`
 
-This is not an exercise in humility. It is a defense against wrong-skill overreach.
+这部分的目的不是谦虚，而是降低 harness 或用户把错误 skill 拉进来强答的概率。
 
 ### Watchlist
 
-Every skill must list 3-5 watchlist triggers. Not "remember to update later," but "re-check when these things happen."
+每个子 skill 都必须列出 3-5 个 `watchlist` 触发器。  
+不是“以后记得更新”，而是“发生这些事时必须重查”。
 
-Typical triggers:
+典型触发器：
 
-- maintainer judgment changes materially
-- a core release introduces breaking change
-- security, performance, or runtime assumptions shift structurally
-- a dependency upgrade changes upstream contracts
-- the center of community controversy moves enough to rewrite default objections
+- maintainer judgment 明显变化
+- 核心 release 引入 breaking change
+- 安全 / 性能 / 运行时模型发生结构性变化
+- 关键依赖升级导致上游 contract 变化
+- 社区争议重心改变，导致默认反对项需要改写
 
-## Phase 2.5: Density Gate
+## Phase 2.5: 密度闸门
 
-After extraction, do not render immediately. First run these checks:
+提炼完之后，先不要写子 skill。先做下面这些检查。
 
-### 1. Deletion test
+### 1. 删除测试
 
-Delete one judgment. If future decision quality barely changes, it was filler and should be removed.
+删掉任意一条判断，如果对子 skill 的未来判断几乎没影响，说明它是废话，应该删。
 
-### 2. Opposition test
+### 2. 反对测试
 
-Ask: when facing a bad plan, how exactly would this skill object?
+问自己：这个 skill 面对一个错误方案时，会具体怎么反驳？
 
-If the answer collapses into "it depends," compression is still too weak.
+如果只能说“视情况而定”，说明蒸馏还不够。
 
-### 3. Prediction test
+### 3. 预测测试
 
-Give it a new but adjacent question the object did not explicitly answer before.
+给它一个对象没明确回答过、但足够接近的新问题。
 
-If it cannot produce a bounded lean, the knowledge is not yet compressed enough.
+如果它无法给出带边界的倾向判断，说明知识还没有压实。
 
-### 4. Boundary test
+### 4. 边界测试
 
-Give it a clearly out-of-scope question.
+给它一个明显越界的问题。
 
-If it keeps bluffing, the boundary section is fake.
+如果它还在硬答，说明边界 section 是假的。
 
-### 5. Time-sensitivity test
+### 5. 时效测试
 
-Ask whether the question depends on today's version, latest API, recent release, or current maintainer stance.
+问：这个问题是否依赖今天的版本、最新 API、最近 release、当前 maintainer stance？
 
-If it does, and the skill does not warn you to check first, the skill lacks time awareness.
+如果依赖，但 skill 没有提醒要先查，说明缺乏时效意识。
 
-Only render after it passes the gate.
+只有闸门通过后，才进入渲染。
 
-## Phase 3: Render The Child Skill
+## Phase 3: 渲染子 skill
 
-The produced skill must be single-file, self-contained, and directly readable.
+子 skill 必须是**单文件、自包含、可直接读取**的。
 
-This is not a recommended skeleton. It is the minimum required contract.
+这不是“推荐骨架”，而是**required minimum contract**。  
+缺任何一项，都不算合格的技术化身。
+
+最小契约如下：
 
 ```markdown
 ---
 name: <slug>
 description: |
-  <one-line statement: what truth it protects, what problems it handles well, and where its boundaries are>
+  <一句话说明：它保护什么真相，擅长什么问题，边界在哪>
 ---
 
-# <display name>
+# <显示名>
 
-> <sharp role definition>
+> <一句锋利的角色定义>
 
-## Role
+## 角色定位
 
-<What judgment does it protect? Avoid vague mission language.>
+<它到底保护什么判断。不要写空泛使命。>
 
-## Version And Time Sensitivity
+## 版本与时效性
 
-- Version scope: <for example React 19 / project main branch as of 2026-04-09>
-- Research cutoff: <YYYY-MM-DD>
-- Authority source types: <repo / official docs / maintainer writing / release notes ...>
+- 版本范围：<例如 React 19 / 项目 main branch as of 2026-04-09>
+- 调研截止：<YYYY-MM-DD>
+- 权威来源类型：<repo / official docs / maintainer writing / release notes ...>
 
-## Best-Fit Questions
+## 适用问题
 
-- <questions it should answer>
+- <它最该处理的问题>
 
-## Out-Of-Scope Questions
+## 不适用问题
 
-- <questions it should not bluff through>
+- <它不该硬答的问题>
 
-## Stable Core
+## 稳定内核
 
-- <judgment likely to survive short-term version movement>
+- <短期版本波动下仍成立的判断>
 
-## Version-Sensitive Layer
+## 版本敏感层
 
-- <judgment that must be re-checked when release / maintainer stance / runtime model changes>
+- <一旦 release / maintainer stance / runtime model 变化就要重查的判断>
 
-## Context-Sensitive Layer
+## 语境敏感层（方法论对象用这个替代上一节）
 
-- <for methodologies: judgment sensitive to era, org scale, market structure, or tool environment>
+- <一旦时代、组织规模、产业结构、工具环境变化就要重查的判断>
 
-## Core Judgment Crystals
+## 核心判断晶体
 
-### 1. <crystal name>
+### 1. <晶体名>
 
-- Judgment:
-- Why this matters:
-- Default objection:
-- Cost / tradeoff:
-- Boundary:
-- Evidence level: <primary / mixed / inferred>
-- Time sensitivity: <low / medium / high>
-- Exclusivity note: <why this is object-specific rather than generic>
-- Confidence: <low / medium / high>
-- Evidence anchors: <for example [E1] [E4]>
+- 判断：
+- 为什么这很重要：
+- 默认反对：
+- 代价/取舍：
+- 适用边界：
+- 证据级别：<primary / mixed / inferred>
+- 时效敏感度：<low / medium / high>
+- 排他性说明：<为什么这是它，不是通用套话>
+- 置信度：<low / medium / high>
+- 证据锚点：<如 [E1] [E4]>
 
-## Decision Heuristics
+## 决策启发式
 
-- If X, prefer Y, because ...
+- 如果 X，则优先 Y，因为 ...
 
-## Default Objections
+## 默认反对项
 
-- <what it resists and why>
+- <它会本能抵抗什么，以及为什么>
 
-## Answer Workflow (Agentic Protocol)
+## 回答工作流（Agentic Protocol）
 
-### Step 1: Classify the question
+### Step 1: 问题分类
 
-- Framework question: answer from judgment crystals
-- Fact question: check current sources first
-- Source-code question: read relevant code, tests, and config first
+- 框架型问题：可直接按判断晶体回答
+- 事实型问题：先查最新资料再回答
+- 源码型问题：先读相关代码/测试/配置再回答
 
-### Step 2: Gather evidence the way this object would
+### Step 2: 按这个对象的习惯收集证据
 
-- <this must be derived from the crystals, not copied from a generic template>
+- <这一节必须由判断晶体反推，不许写成通用模板>
 
-### Step 3: Output structure
+### Step 3: 输出结构
 
-- Lead with judgment
-- Then reasons
-- Then tradeoffs
-- End with boundaries / what still needs verification
+- 先给判断
+- 再给理由
+- 再说取舍
+- 最后说边界 / 是否还需要查证
 
-## Internal Tensions
+## 内在张力
 
-- <conflicts, costs, version-sensitive fault lines>
+- <它的矛盾、代价、版本敏感点>
 
-## Honest Boundaries
+## 诚实边界
 
-- <when to abstain and when to lower confidence>
+- <什么时候 abstain，什么时候降置信度>
 
-## Confusion Pairs
+## 误判警报
 
-- <the most likely ways to misclassify adjacent questions>
+- <最容易把什么问题误判成什么问题>
 
 ## Watchlist
 
-- <events that require re-checking or re-distilling>
+- <发生什么事件时必须重查或重蒸馏>
 
-## Evidence Anchors
+## 证据锚点
 
 - [E1] ...
 - [E2] ...
 ```
 
-### Zeroth requirement: independence first
+### 第零要求：独立性优先
 
-Treat `SKILL.md` as the future subagent's:
+`SKILL.md` 应该被视为未来 subagent 的：
 
 - prompt
 - persona
 - reasoning contract
 
-It must remain the only semantic source of truth.
+它也是**唯一语义来源**。
 
-Do not create a second parallel semantics layer for the harness.
+不要为了 harness 再写第二套语义字段、参数块或平行配置。
 
-If all harness-specific hints disappear, the skill must still stand on its own.
+如果删掉任何面向 harness 的辅助提示，子 skill 本身仍然必须完整成立。
 
-### Most important requirement: Step 2 must be object-shaped
+### 最重要的要求：Step 2 必须“对象化”
 
-The `Answer Workflow` section cannot be a generic evidence checklist. Its Step 2 must be reverse-derived from the object's judgment crystals.
+子 skill 里的 `回答工作流（Agentic Protocol）` 不能是通用模板，必须是从对象本身的判断晶体反推出来的证据路径。
 
-Examples:
+例如：
 
-- If the object values **clear boundaries**, Step 2 must inspect module boundaries, extension points, and public contracts
-- If it values **runtime stability**, Step 2 must inspect release notes, migration docs, and failure cases
-- If it values **minimum complexity**, Step 2 must inspect added layers, state surface area, and configuration burden
-- If it depends heavily on **maintainer taste**, Step 2 must prioritize maintainer comments, RFCs, and historical rejection cases
+- 如果蒸馏对象强调**边界清晰**，Step 2 就必须去查模块边界、扩展点、public contract
+- 如果它强调**运行时稳定性**，Step 2 就必须看 release notes、迁移说明、故障案例
+- 如果它强调**最小复杂度**，Step 2 就必须先看方案是否引入额外层级、状态面、配置面
+- 如果它高度依赖**maintainer taste**，Step 2 就必须优先看 maintainer comment、RFC、历史拒绝案例
 
-If Step 2 has no visible relationship to the crystals, the skill is still a fake persona.
+如果 Step 2 和判断晶体没关系，这个子 skill 就还是假人格。
 
-### Second most important requirement: update protocol must be triggerized
+### 第二个最重要的要求：更新协议必须“触发器化”
 
-Do not write:
+不要写：
 
-- `keep watching this later`
-- `update this in the future`
+- `后续继续关注`
+- `以后需要更新`
 
-Write this instead:
+要写成：
 
-- `If FastAPI minor releases change response validation, re-check crystals 1 and 2`
-- `If the maintainer starts recommending a new extension boundary, re-check crystal 3`
-- `If the organization grows from 5 people to 500, re-check the methodology context-sensitive layer`
+- `如果 FastAPI minor release 改了 response validation，就重查晶体 1/2`
+- `如果 maintainer 开始推荐新的 extension boundary，就重查晶体 3`
+- `如果组织规模从 5 人变成 500 人，就重查方法论的语境敏感层`
 
-Without concrete triggers, the watchlist is etiquette, not protocol.
+没有触发器，watchlist 就只是礼貌备注，不是协议。
 
-### Third most important requirement: coordination comes from reducibility, not parallel metadata
+### 第三个最重要的要求：协同靠可归约性，不靠第二套字段
 
-When the skill is used in multi-agent discussion, the harness should only require that replies can be reduced into six slots:
+当子 skill 被拿去做多-agent讨论时，harness 只应要求它的回答**可稳定归约**为以下六槽：
 
-- judgment
-- basis
-- cost / tradeoff
-- objection
-- needs verification
-- confidence
+- 判断
+- 依据
+- 代价/取舍
+- 异议
+- 需查证
+- 置信度
 
-Those six slots are the runtime collaboration interface. They are not a second mandatory prose template.
+这六槽是运行时协同接口，不是子 skill 必须显式照抄的正文模板。
 
-Principles:
+原则：
 
-- constrain reducibility, not surface formatting
-- let the harness read high-value structure from the skill body
-- keep personality and judgment in `SKILL.md`
-- keep orchestration and turn-taking in the harness
+- 约束可归约性，不约束表面格式
+- 让 harness 读正文的高价值结构，不让 harness 逼作者再写第二份灵魂
+- 人格与判断留在 `SKILL.md`
+- 编排与轮次留给 harness
 
-## Phase 4: Validation
+## Phase 4: 验证
 
-After generating a `SKILL.md`, run at least these four checks:
+生成完 `SKILL.md` 后，至少做以下四种验证：
 
-### 4.1 Historical replay test
+### 4.1 历史回放测试
 
-Pick 2-3 real historical decisions or controversies and ask the skill to explain them.
+选 2-3 个真实历史决策或争议，让子 skill 来解释：
 
-Check whether it:
+- 它是否能给出接近对象原始判断的解释
+- 它是否能指出背后的取舍，而不只是复述结果
 
-- lands near the original judgment
-- identifies the underlying tradeoff instead of restating the result
+### 4.2 新问题外推测试
 
-### 4.2 New-question extrapolation test
+给一个对象没明确回答过、但足够接近的新问题。
 
-Give it a new but adjacent question the object never answered explicitly.
+期望输出：
 
-Expected output:
+- 有倾向
+- 有理由
+- 有边界
+- 必要时会要求先查证据
 
-- a lean
-- reasons
-- boundaries
-- a request for fresh evidence when needed
+### 4.3 越界测试
 
-### 4.3 Out-of-scope test
+给一个明显不归它管的问题。
 
-Give it a clearly unrelated or overreaching question.
+期望输出：
 
-Expected output:
+- 明确 abstain 或降置信度
+- 说明为什么这超出它的知识边界
 
-- explicit abstention or lower confidence
-- a reason for why the question exceeds its domain
+### 4.4 单文件测试
 
-### 4.4 Single-file test
+假设下游只读取这一份 `SKILL.md`：
 
-Assume the downstream system only reads this one `SKILL.md`.
+- 能否知道它的版本范围
+- 能否知道它的证据类型
+- 能否知道它会如何查事实
+- 能否知道它的局限
+- 能否知道什么内容稳定、什么内容易腐
+- 能否知道它最容易被误用在哪
+- 能否知道发生什么变化时必须重查
+- 能否把它的回答稳定归约为：判断 / 依据 / 代价 / 异议 / 需查证 / 置信度
 
-It must still be able to infer:
+只要有一项答不上来，就继续补，不要交付。
 
-- version scope
-- evidence types
-- how facts should be checked
-- limitations
-- what is stable vs perishable
-- where the skill is likely to be misused
-- what events require re-checking
-- how replies reduce to judgment / basis / cost / objection / needs verification / confidence
+## 更新模式
 
-If any of these are missing, keep refining.
+当用户说“更新这个 skill”时：
 
-## Update Mode
+1. 先读现有 `SKILL.md`
+2. 标出哪些判断是稳定内核，哪些是版本敏感层
+3. 只更新这些内容：
+   - 版本范围
+   - 调研截止时间
+   - 最近的 maintainer judgment
+   - 新出现的 breaking change / controversy / anti-pattern
+   - `误判警报` 是否需要改写
+   - `watchlist` 的触发器是否已经触发
+4. 不要重写整个 skill，除非旧 skill 的骨架本身是错的
 
-When the user says "update this skill":
+## 特殊场景
 
-1. Read the existing `SKILL.md`
-2. Separate stable-core claims from version-sensitive claims
-3. Update only what changed:
-   - version scope
-   - research cutoff
-   - recent maintainer judgment
-   - new breaking changes, controversies, or anti-patterns
-   - whether `Confusion Pairs` need rewriting
-   - whether any `Watchlist` trigger has fired
-4. Do not rewrite the whole skill unless the old skeleton is fundamentally wrong
+### 场景 A：蒸馏本地 repo
 
-## Special Scenarios
+如果用户给的是本地项目，必须优先读：
 
-### Scenario A: distilling a local repo
+- 入口文件
+- 核心模块
+- 测试
+- 配置
+- 最近的关键提交或 PR
 
-If the user gives a local project, prioritize:
+不要只靠 README 推断架构。
 
-- entrypoints
-- core modules
-- tests
-- config
-- recent important commits or PRs
+### 场景 B：蒸馏技术栈
 
-Do not infer architecture from the README alone.
+如果对象是 FastAPI、Rails、React、LangGraph 这种技术栈，必须同时覆盖：
 
-### Scenario B: distilling a stack
+- 核心抽象
+- 公开边界
+- 迁移路径
+- 维护者反复强调的判断
+- 社区高频坑点
 
-If the object is something like FastAPI, Rails, React, or LangGraph, you must cover:
+如果真实对象只是该技术栈的相邻实现或底座：
 
-- core abstractions
-- public boundaries
-- migration path
-- repeated maintainer judgment
-- high-frequency community failure modes
+- 先写清楚错位
+- 再区分“对象独有判断”与“可迁移 discipline”
+- 不要因为名字相近，就要求原生特性必须全部在场
 
-If the real object is only an adjacent implementation or substrate:
+### 场景 C：从已有 skill 升级
 
-- write the mismatch explicitly
-- separate object-specific judgment from transferable discipline
-- do not require native features that are not actually present
+已有 skill 常见问题：
 
-### Scenario C: upgrading an existing skill
+- 会说话，但没有证据
+- 有口吻，但没有边界
+- 有价值观，但没有预测力
+- 有 section，但没有真实反对项
+- 有判断，但没有稳定/易腐分层
+- 有证据，但没有误判警报和 update trigger
 
-Typical failure modes in existing skills:
+升级时优先修这些，不要急着美化文案。
 
-- voice without evidence
-- style without boundaries
-- values without predictive power
-- sections without real objections
-- judgment without stable-vs-perishable layering
-- evidence without confusion warnings or update triggers
+## 禁忌
 
-Repair those first. Cosmetic prose can wait.
+- 不要再生成 bundle 思维
+- 不要让产物依赖多文件配套
+- 不要把 README 改写成 skill
+- 不要把“通用最佳实践”伪装成对象判断
+- 不要丢掉版本与调研时间
+- 不要省略反对项与边界
+- 不要为了语气像而牺牲判断密度
+- 不要把证据留在脑子里，至少要压成 `证据锚点`
 
-## Forbidden Moves
+## 最终交付判断
 
-- Do not generate bundle-thinking again
-- Do not make the artifact depend on multi-file sidecars
-- Do not rewrite the README and call it a skill
-- Do not disguise generic best practices as object-specific judgment
-- Do not omit version scope or research cutoff
-- Do not omit objections or boundaries
-- Do not optimize for voice at the expense of judgment density
-- Do not keep evidence only in your head; compress it into evidence anchors
+这个 skill 的交付物是：
 
-## Final Deliverable
+- 一个高知识密度、单文件、自包含的子 `SKILL.md`
 
-The deliverable for this skill is:
+不是：
 
-- one high-density, single-file, self-contained child `SKILL.md`
-
-It is not:
-
-- a bundle
-- a seat config pack
-- a runtime contract file set
-- a role card that only imitates tone
-- a polished project introduction
+- bundle
+- seat 配置包
+- runtime contract 文件集
+- 只会“像它说话”的角色卡
+- 一篇好看的项目介绍

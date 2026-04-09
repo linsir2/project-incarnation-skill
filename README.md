@@ -33,7 +33,7 @@ $project-incarnation Distill this repository into a reusable skill that captures
 The output is a single child skill:
 
 ```text
-.codex/skills/<slug>/SKILL.md
+<repo>/skills/<slug>/SKILL.md
 ```
 
 That generated skill should contain:
@@ -51,6 +51,8 @@ This skill does **not** try to generate bundles or sidecar packages such as:
 - `sources.jsonl`
 - `bundle-spec.json`
 - `evals.md`
+
+Tool-private directories such as `.codex/`, `.claude/`, or similar agent-specific folders are not the canonical default output anymore. They should only be treated as adapter or convenience entry points.
 
 ## Best Use Cases
 

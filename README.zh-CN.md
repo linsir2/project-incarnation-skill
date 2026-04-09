@@ -33,7 +33,7 @@ $project-incarnation 把这个仓库蒸馏成一个能复现 maintainer judgment
 最终产物是一个子 skill：
 
 ```text
-.codex/skills/<slug>/SKILL.md
+<repo>/skills/<slug>/SKILL.md
 ```
 
 这个子 skill 应该包含：
@@ -51,6 +51,8 @@ $project-incarnation 把这个仓库蒸馏成一个能复现 maintainer judgment
 - `sources.jsonl`
 - `bundle-spec.json`
 - `evals.md`
+
+像 `.codex/`、`.claude/` 这类工具私有目录，不再是 canonical 默认输出路径。它们现在只应该被视为 adapter / convenience 入口。
 
 ## 适合什么场景
 
