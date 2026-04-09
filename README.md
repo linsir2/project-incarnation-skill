@@ -1,8 +1,32 @@
 # project-incarnation
 
-`project-incarnation` is a Codex skill for turning a repo, framework, SDK, engineering methodology, or existing skill into a high-density `SKILL.md`.
+[中文说明](./README.zh-CN.md)
+
+`project-incarnation` is a skill for turning a repo, framework, SDK, engineering methodology, or existing skill into a high-density `SKILL.md`.
 
 Its job is narrow and strict: compress an object's real judgment into one self-contained file that a downstream agent can reason with.
+
+## Quickstart
+
+Install into Codex manually:
+
+```bash
+mkdir -p ~/.codex/skills/project-incarnation
+cp /path/to/project-incarnation-skill/SKILL.md \
+  ~/.codex/skills/project-incarnation/SKILL.md
+```
+
+Or install from GitHub with the Skills CLI:
+
+```bash
+npx skills add linsir2/project-incarnation-skill -a codex -g -y
+```
+
+Invoke it explicitly:
+
+```text
+$project-incarnation Distill this repository into a reusable skill that captures maintainer judgment.
+```
 
 ## What This Skill Produces
 
@@ -57,10 +81,11 @@ If the generated skill needs extra files to explain how it thinks, the distillat
 ./
 ├── LICENSE
 ├── README.md
+├── README.zh-CN.md
 └── SKILL.md
 ```
 
-This repository is intentionally flat. The public distribution surface is one English `SKILL.md`.
+The repository is intentionally flat. The public distribution surface is one English `SKILL.md`, plus bilingual documentation.
 
 ## Translation Audit
 
@@ -94,13 +119,7 @@ After installing a new skill, restart Codex so it reloads the skill list.
 
 ### Option 2: Install with the Skills CLI
 
-Once this repository is pushed to GitHub, users should be able to install it with:
-
-```bash
-npx skills add <owner>/<repo> -a codex -g
-```
-
-Example:
+Install directly from GitHub:
 
 ```bash
 npx skills add linsir2/project-incarnation-skill -a codex -g
@@ -110,6 +129,12 @@ For non-interactive installs:
 
 ```bash
 npx skills add linsir2/project-incarnation-skill -a codex -g -y
+```
+
+To list the available skills in the repository without installing:
+
+```bash
+npx skills add linsir2/project-incarnation-skill -a codex -g -l
 ```
 
 You do not need to publish the skill itself as an npm package. The `skills` package is the installer; the skill is distributed from GitHub.
@@ -224,16 +249,14 @@ In practice, supporting `skills.sh` means making the GitHub repository installab
 
 ## Local Verification Status
 
-This repository is prepared for that distribution path:
+This repository has been verified to the following extent:
 
-- root `SKILL.md` exists for CLI discovery
-- an MIT license is included
-- the repository ships a single English skill file
-- the English version was reviewed against the original Chinese draft before flattening
+- `git push -u origin main` succeeded to `https://github.com/linsir2/project-incarnation-skill.git`
+- `npm view skills version` resolved successfully and returned `1.4.9`
+- `npx -y skills --help` executed successfully
+- `npx -y skills add linsir2/project-incarnation-skill -a codex -g -l` successfully discovered 1 skill: `project-incarnation`
 
-Live verification of `npx skills` in this environment is still incomplete because npm registry lookup failed here.
-
-More specifically, `npm view skills version` reached the npm registry lookup step and failed with DNS resolution errors (`EAI_AGAIN`) in this environment, so the repository is prepared for distribution but not yet proven by a live remote install here.
+The only thing still not verified in this environment is a full install into local agent directories, because that would mutate the current machine's skill setup.
 
 ## License
 
