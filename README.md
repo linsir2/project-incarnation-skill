@@ -59,7 +59,7 @@ Tool-private directories such as `.codex/` and `.claude/` are adapter paths, not
 Install from GitHub with the Skills CLI:
 
 ```bash
-npx skills add linsir2/project-incarnation-skill -g -y
+npx skills add linsir2/project-incarnation-skill
 ```
 
 ## How To Use
