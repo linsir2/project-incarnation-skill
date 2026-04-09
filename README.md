@@ -56,18 +56,10 @@ Tool-private directories such as `.codex/` and `.claude/` are adapter paths, not
 
 ## Install
 
-Install manually into Codex:
-
-```bash
-mkdir -p ~/.codex/skills/project-incarnation
-cp /path/to/project-incarnation-skill/SKILL.md \
-  ~/.codex/skills/project-incarnation/SKILL.md
-```
-
 Install from GitHub with the Skills CLI:
 
 ```bash
-npx skills add linsir2/project-incarnation-skill -a codex -g -y
+npx skills add linsir2/project-incarnation-skill -g -y
 ```
 
 ## How To Use
