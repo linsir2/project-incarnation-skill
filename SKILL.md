@@ -32,8 +32,17 @@ description: |
 最终产物只有：
 
 ```text
-<project-root>/skills/<slug>/
+<runtime-skill-root>/<slug>/
 └── SKILL.md
+```
+
+其中 `<runtime-skill-root>` 指的是**agent 运行时可直接发现和加载的安装目录**，例如：
+
+```text
+<project-root>/.agents/skills/
+<project-root>/.codex/skills/
+$CODEX_HOME/skills/
+~/.codex/skills/
 ```
 
 不生成 `constitution.yaml`、`sources.jsonl`、`bundle-spec.json`、`evals.md`、`references/`、`scripts/`。
@@ -112,25 +121,48 @@ description: |
 | 已有 skill | 升级路径 | 读取旧 skill，补足证据、边界、预测力 |
 | 用户只说“我想要一种能力” | 诊断路径 | 先判断该蒸馏哪个对象，再进入对应路径 |
 
-如果用户没有指定输出位置，默认写到：
+如果用户没有指定输出位置，默认**安装**到 runtime skill root，而不是普通内容目录。
+
+推荐优先级：
+
+1. 如果当前项目已经有 `<project-root>/.agents/skills/`，写到：
 
 ```text
-<project-root>/skills/<slug>/SKILL.md
+<project-root>/.agents/skills/<slug>/SKILL.md
+```
+
+2. 否则如果当前项目已经有 `<project-root>/.codex/skills/`，写到：
+
+```text
+<project-root>/.codex/skills/<slug>/SKILL.md
+```
+
+3. 否则如果当前处于一个明确项目根内，默认创建并写到：
+
+```text
+<project-root>/.agents/skills/<slug>/SKILL.md
 ```
 
 如果当前不在一个明确项目根内，就回退到：
 
 ```text
-./skills/<slug>/SKILL.md
+$CODEX_HOME/skills/<slug>/SKILL.md
+```
+
+如果拿不到 `$CODEX_HOME`，再回退到：
+
+```text
+~/.codex/skills/<slug>/SKILL.md
 ```
 
 路径角色约定：
 
 - `authoring root`：authoring/compiler 类 skill 的 canonical 位置，例如 `<project-root>/authoring/`
-- `runtime skill root`：运行时子 skill 的默认位置，例如 `<project-root>/skills/`
+- `runtime skill root`：运行时子 skill 的安装位置，例如 `<project-root>/.agents/skills/`、`<project-root>/.codex/skills/`、`$CODEX_HOME/skills/`
 - `trace root`：运行痕迹与回放资产的位置，例如 `<project-root>/traces/`
 
-像 `.codex/`、`.claude/` 这样的工具私有目录，只能作为 adapter / convenience 入口，不应当再被写成 canonical 默认值。
+在这个 skill 里，`.agents/skills/`、`.codex/skills/` 这类 runtime 目录**就是默认安装目标**，不是可忽略的 adapter。
+不要再把普通 `./skills/` 当默认落点，除非用户明确要求只导出、不安装。
 
 `<slug>` 规则：
 
@@ -657,7 +689,7 @@ description: |
 
 当用户说“更新这个 skill”时：
 
-1. 先读现有 `SKILL.md`
+1. 先定位**已安装的** `SKILL.md`
 2. 标出哪些判断是稳定内核，哪些是版本敏感层
 3. 只更新这些内容：
    - 版本范围
@@ -711,6 +743,20 @@ description: |
 
 升级时优先修这些，不要急着美化文案。
 
+### 场景 D：蒸馏完成后直接安装
+
+默认目标不是“生成一个文件给用户手动搬运”，而是**直接把 skill 安装到 runtime skill root**。
+
+执行顺序：
+
+1. 先确定 runtime skill root（`.codex/skills/`、`.agents/skills/`、`$CODEX_HOME/skills/`）
+2. 再写入 `<slug>/SKILL.md`
+3. 如果你临时写到了普通工作目录，最终也要移动或复制到安装目录
+4. 最终汇报时明确：
+   - 安装到了哪里
+   - slug 是什么
+   - 下游应如何触发它
+
 ## 禁忌
 
 - 不要再生成 bundle 思维
@@ -721,12 +767,13 @@ description: |
 - 不要省略反对项与边界
 - 不要为了语气像而牺牲判断密度
 - 不要把证据留在脑子里，至少要压成 `证据锚点`
+- 不要默认只写到普通 `skills/` 目录却不安装到 runtime skill root
 
 ## 最终交付判断
 
 这个 skill 的交付物是：
 
-- 一个高知识密度、单文件、自包含的子 `SKILL.md`
+- 一个高知识密度、单文件、自包含、并且已安装到 runtime skill root 的 `SKILL.md`
 
 不是：
 
@@ -734,4 +781,5 @@ description: |
 - seat 配置包
 - runtime contract 文件集
 - 只会“像它说话”的角色卡
+- 一个留在普通目录、还要用户手动搬运的半成品
 - 一篇好看的项目介绍
